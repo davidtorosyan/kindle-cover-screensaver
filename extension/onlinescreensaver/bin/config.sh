@@ -74,7 +74,8 @@ DONOTRETRY=0
 # Advanced
 #############################################################################
 
-# the real-time clock to use (0, 1 or 2)
+# the real-time clock to use (0, 1 or 2). Unused since wait_for switched to
+# powerd's rtcWakeup; kept for compatibility with older configs.
 RTC=0
 
 # the temporary file to download the screensaver image to
