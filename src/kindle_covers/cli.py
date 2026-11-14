@@ -5,7 +5,7 @@ from typing import Annotated, Optional
 import typer
 
 from kindle_covers.devices import SIZE_MAP, Device
-from kindle_covers.generate import Status, process_library
+from kindle_covers.generate import process_library
 from kindle_covers.rotate import choose_and_copy_cover
 
 app = typer.Typer(
@@ -80,7 +80,7 @@ def generate(
     elif not (width and height):
         raise typer.BadParameter("specify --device, or both --width and --height")
 
-    summary = process_library(
+    process_library(
         library_dir,
         output_dir,
         width,
@@ -91,8 +91,6 @@ def generate(
         clean,
         border_color,
     )
-    if summary[Status.failed]:
-        raise typer.Exit(code=2)
 
 
 @app.command()
