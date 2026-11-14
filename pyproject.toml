@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kindle-covers"
+version = "1.0.0"
+description = "Turn your Calibre library into rotating Kindle screensavers."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+    "typer>=0.9",
+    "Pillow>=10",
+    "pathvalidate>=3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+kindle-covers = "kindle_covers.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/kindle_covers"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.isort]
+profile = "black"
