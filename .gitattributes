@@ -1,0 +1,6 @@
+* text=auto
+# Kindle-side files run under busybox sh / upstart and must keep Unix line endings.
+extension/** text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.png binary
