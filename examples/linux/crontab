@@ -1,0 +1,10 @@
+# Example crontab for the web server (install with `crontab -e`).
+#
+# Picks a new random cover every hour and puts it where the web server serves
+# it. Use the full path to kindle-covers: cron has a minimal PATH
+# (`which kindle-covers` shows it, e.g. ~/.local/bin/kindle-covers).
+#
+# The Kindle downloads on its own schedule (see SCHEDULE in the extension's
+# config.sh), so rotating somewhat more often than the Kindle checks is fine.
+
+0 * * * *  /home/you/.local/bin/kindle-covers rotate /srv/kindle/covers /var/www/kindle/cover.png >> /var/log/kindle-covers.log 2>&1
