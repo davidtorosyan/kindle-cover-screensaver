@@ -1,0 +1,9 @@
+# Copy this file to config_override.sh (same folder) and put your personal
+# settings here. Anything set here overrides config.sh. config_override.sh is
+# git-ignored so your URL never ends up in the repo.
+
+IMAGE_URI="http://your-server.example/kindle/cover.png"
+
+# Uncomment while setting things up:
+#LOGGING=1
+#LOGFILE=/mnt/us/onlinescreensaver.log

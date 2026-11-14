@@ -64,6 +64,10 @@ TEST_DOMAIN="www.google.com"
 # increase this value)
 NETWORK_TIMEOUT=30
 
+# Whether to touch (update the timestamp of) the current screensaver file
+# when a download fails (1) or not (0). Either way the old image is kept.
+DONOTRETRY=0
+
 
 
 #############################################################################
@@ -75,3 +79,14 @@ RTC=0
 
 # the temporary file to download the screensaver image to
 TMPFILE=/tmp/tmp.onlinescreensaver.png
+
+
+#############################################################################
+# Local overrides
+#############################################################################
+
+# Keep your personal settings (e.g. IMAGE_URI) in config_override.sh next to
+# this file, so this file can stay generic. See config_override.sh.example.
+if [ -e /mnt/us/extensions/onlinescreensaver/bin/config_override.sh ]; then
+	source /mnt/us/extensions/onlinescreensaver/bin/config_override.sh
+fi

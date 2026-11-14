@@ -20,7 +20,8 @@ if [ -e "config.sh" ]; then
 	source /mnt/us/extensions/onlinescreensaver/bin/config.sh
 else
 	# set default values
-	INTERVAL=240
+	DEFAULTINTERVAL=240
+	SCHEDULE="00:00-24:00=240"
 	RTC=0
 fi
 

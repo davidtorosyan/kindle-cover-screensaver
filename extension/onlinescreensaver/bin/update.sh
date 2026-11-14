@@ -14,11 +14,6 @@ else
 	TMPFILE=/tmp/tmp.onlinescreensaver.png
 fi
 
-# load override configuration
-if [ -e "config_override.sh" ]; then
-	source /mnt/us/extensions/onlinescreensaver/bin/config_override.sh
-fi
-
 # load utils
 if [ -e "utils.sh" ]; then
 	source /mnt/us/extensions/onlinescreensaver/bin/utils.sh
@@ -28,9 +23,9 @@ else
 fi
 
 # do nothing if no URL is set
-if [ -z $IMAGE_URI ]; then
-	logger "No image URL has been set. Please edit config.sh."
-	return
+if [ -z "$IMAGE_URI" ]; then
+	logger "No image URL has been set. Please edit config.sh or config_override.sh."
+	exit 0
 fi
 
 # enable wireless if it is currently off
@@ -60,25 +55,25 @@ while [ 0 -eq $CONNECTED ]; do
 done
 
 if [ 1 -eq $CONNECTED ]; then
-	if wget -q $IMAGE_URI -O $TMPFILE; then
-		mv $TMPFILE $SCREENSAVERFILE
+	if wget -q "$IMAGE_URI" -O "$TMPFILE"; then
+		mv "$TMPFILE" "$SCREENSAVERFILE"
 		logger "Screen saver image updated"
 
 		# refresh screen
 		lipc-get-prop com.lab126.powerd status | grep "Screen Saver" && (
 			logger "Updating image on screen"
-			eips -f -g $SCREENSAVERFILE
+			eips -f -g "$SCREENSAVERFILE"
 		)
 	else
 		logger "Error updating screensaver"
-		if [ 1 -eq $DONOTRETRY ]; then
-			touch $SCREENSAVERFILE
+		if [ 1 -eq "${DONOTRETRY:-0}" ]; then
+			touch "$SCREENSAVERFILE"
 		fi
 	fi
 fi
 
 # disable wireless if necessary
-if [ 1 -eq $DISABLE_WIFI ]; then
+if [ 1 -eq "${DISABLE_WIFI:-0}" ]; then
 	logger "Disabling WiFi"
 	lipc-set-prop com.lab126.cmd wirelessEnable 0
 fi
